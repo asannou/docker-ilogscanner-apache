@@ -1,8 +1,19 @@
 #!/bin/sh
 
-ACCESSLOG=$1
-DATEFROM=$2
-DATETO=$3
+args=$(getopt f:t: $*)
+test $? != 0 && exit 2
+
+set -- $args
+
+for i do
+  case "$i" in
+    -f) DATEFROM="$2"; shift 2;;
+    -t) DATETO="$2"; shift 2;;
+    --) shift; break;;
+  esac
+done
+
+ACCESSLOG="$1"
 
 mkdir /wd~
 cat << EOD > iLogScanner/1_bin/iLogScanner.conf
