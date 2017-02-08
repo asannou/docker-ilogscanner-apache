@@ -4,16 +4,16 @@ ACCESSLOG=$1
 DATEFROM=$2
 DATETO=$3
 
-mkdir /outdir~
+mkdir /wd~
 cat << EOD > iLogScanner/1_bin/iLogScanner.conf
 [AccessLog]
 ScanDateFrom = $DATEFROM
 ScanDateTo = $DATETO
 EOD
 
-sh iLogScanner/1_bin/iLogScanner.sh mode=cui logtype=apache accesslog="/accesslog/$ACCESSLOG" outdir=/outdir~ reporttype=all level=detail
+sh iLogScanner/1_bin/iLogScanner.sh mode=cui logtype=apache accesslog="/wd/$ACCESSLOG" outdir=/wd~ reporttype=all level=detail
 
-cat /outdir~/*.xml 2> /dev/null
-cat /outdir~/iLogScanner_error.log >&2 2> /dev/null
+cat /wd~/*.xml 2> /dev/null
+cat /wd~/iLogScanner_error.log >&2 2> /dev/null
 
-mv /outdir~/* /outdir/
+mv /wd~/* /wd/

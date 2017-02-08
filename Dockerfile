@@ -12,4 +12,4 @@ RUN apk del tzdata openssl
 COPY entrypoint.sh .
 ENTRYPOINT ["sh", "entrypoint.sh"]
 
-VOLUME ["/accesslog", "/outdir"]
+VOLUME /wd
