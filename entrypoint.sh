@@ -1,28 +1,34 @@
 #!/bin/sh
 
-args=$(getopt f:t: $*)
-test $? != 0 && exit 2
+TYPE='all'
+LEVEL='detail'
+FORMAT=''
+BEGIN=''
+END=''
 
-set -- $args
-
-for i do
-  case "$i" in
-    -f) DATEFROM="$2"; shift 2;;
-    -t) DATETO="$2"; shift 2;;
-    --) shift; break;;
+while getopts 't:l:d:f:b:e:' opt; do
+  case "$opt" in
+    t) TYPE="$OPTARG";;
+    l) LEVEL="$OPTARG";;
+    f) FORMAT="$OPTARG";;
+    b) BEGIN="$OPTARG";;
+    e) END="$OPTARG";;
+    ?) exit 2;;
   esac
 done
 
+shift $(($OPTIND - 1))
 ACCESSLOG="$1"
 
 mkdir /wd~
 cat << EOD > iLogScanner/1_bin/iLogScanner.conf
 [AccessLog]
-ScanDateFrom = $DATEFROM
-ScanDateTo = $DATETO
+AccessLogFormat = $FORMAT
+ScanDateFrom = $BEGIN
+ScanDateTo = $END
 EOD
 
-sh iLogScanner/1_bin/iLogScanner.sh mode=cui logtype=apache accesslog="/wd/$ACCESSLOG" outdir=/wd~ reporttype=all level=detail
+sh iLogScanner/1_bin/iLogScanner.sh mode=cui logtype=apache accesslog="/wd/$ACCESSLOG" outdir=/wd~ reporttype="$TYPE" level="$LEVEL"
 
 cat /wd~/*.xml 2> /dev/null
 cat /wd~/iLogScanner_error.log >&2 2> /dev/null
