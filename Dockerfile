@@ -11,4 +11,6 @@ RUN apk del tzdata
 COPY entrypoint.sh .
 ENTRYPOINT ["sh", "entrypoint.sh"]
 
-VOLUME ["/jar", "/wd"]
+VOLUME ["/wd"]
+
+COPY Dockerfile.run ./Dockerfile

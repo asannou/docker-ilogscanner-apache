@@ -20,14 +20,8 @@ done
 shift $(($OPTIND - 1))
 ACCESSLOG="$1"
 
-if [ ! -e /jar/iLogScanner ]; then
-  wget -q https://www.ipa.go.jp/security/vuln/iLogScanner/app/iLogScanner.zip
-  unzip -q -d /jar iLogScanner.zip
-  rm iLogScanner.zip
-fi
-
 mkdir /wd~
-cat << EOD > /jar/iLogScanner/1_bin/iLogScanner.conf
+cat << EOD > iLogScanner/1_bin/iLogScanner.conf
 [AccessLog]
 AccessLogFormat = $FORMAT
 ScanDateFrom = $BEGIN

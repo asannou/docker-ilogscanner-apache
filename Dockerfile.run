@@ -1,0 +1,4 @@
+FROM asannou/ilogscanner-apache:build
+
+RUN wget https://www.ipa.go.jp/security/vuln/iLogScanner/app/iLogScanner.zip
+RUN unzip iLogScanner.zip && rm iLogScanner.zip
