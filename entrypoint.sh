@@ -28,7 +28,7 @@ ScanDateFrom = $BEGIN
 ScanDateTo = $END
 EOD
 
-sh /jar/iLogScanner/1_bin/iLogScanner.sh mode=cui logtype=apache accesslog="/wd/$ACCESSLOG" outdir=/wd~ reporttype="$TYPE" level="$LEVEL"
+sh iLogScanner/1_bin/iLogScanner.sh mode=cui logtype=apache accesslog="/wd/$ACCESSLOG" outdir=/wd~ reporttype="$TYPE" level="$LEVEL"
 
 cat /wd~/*.xml 2> /dev/null
 cat /wd~/iLogScanner_error.log >&2 2> /dev/null
