@@ -1,3 +1,4 @@
 ```
-# docker run -it --rm -v $(docker volume create --name ilogscanner):/jar -v $(pwd):/wd asannou/ilogscanner-apache
+# docker run -it --rm -v /var/run/docker.sock:/docker.sock \
+asannou/docker-run -it --rm -v $(pwd):/wd -- asannou/ilogscanner-apache:build
 ```
