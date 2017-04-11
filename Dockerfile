@@ -1,16 +1,4 @@
-FROM openjdk:jre-alpine
+FROM asannou/ilogscanner-apache:base
 
-WORKDIR /root
-
-RUN apk update && apk add tzdata openssl
-
-RUN cp /usr/share/zoneinfo/Asia/Tokyo /etc/localtime && echo "Asia/Tokyo" > /etc/timezone
-
-RUN apk del tzdata
-
-COPY entrypoint.sh .
-ENTRYPOINT ["sh", "entrypoint.sh"]
-
-VOLUME ["/wd"]
-
-COPY Dockerfile.run ./Dockerfile
+RUN wget https://www.ipa.go.jp/security/vuln/iLogScanner/app/iLogScanner.zip
+RUN unzip iLogScanner.zip && rm iLogScanner.zip
