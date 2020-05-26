@@ -26,15 +26,17 @@ if [ ! -e /jar/iLogScanner ]; then
   rm iLogScanner.zip
 fi
 
-mkdir /wd~
-cat << EOD > /jar/iLogScanner/1_bin/iLogScanner.conf
+mkdir /wd~ /jar~
+cp /jar/iLogScanner/1_bin/* /jar~/
+
+cat << EOD > /jar~/iLogScanner.conf
 [AccessLog]
 AccessLogFormat = $FORMAT
 ScanDateFrom = $BEGIN
 ScanDateTo = $END
 EOD
 
-sh /jar/iLogScanner/1_bin/iLogScanner.sh mode=cui logtype=apache accesslog="/wd/$ACCESSLOG" outdir=/wd~ reporttype="$TYPE" level="$LEVEL"
+sh /jar~/iLogScanner.sh mode=cui logtype=apache accesslog="/wd/$ACCESSLOG" outdir=/wd~ reporttype="$TYPE" level="$LEVEL"
 
 cat /wd~/*.xml 2> /dev/null
 cat /wd~/iLogScanner_error.log >&2 2> /dev/null
