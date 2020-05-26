@@ -26,6 +26,8 @@ if [ ! -e /jar/iLogScanner ]; then
   rm iLogScanner.zip
 fi
 
+test -z "$ACCESSLOG" && exit
+
 mkdir /wd~ /jar~
 cp /jar/iLogScanner/1_bin/* /jar~/
 
