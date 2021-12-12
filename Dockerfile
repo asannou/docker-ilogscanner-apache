@@ -1,4 +1,4 @@
-FROM asannou/library-openjdk:8-jre-slim
+FROM openjdk:8-jre-slim
 
 WORKDIR /root
 
