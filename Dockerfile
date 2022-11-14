@@ -1,14 +1,11 @@
-FROM openjdk:8-jre-slim
+FROM eclipse-temurin:8-jre-alpine
 
 WORKDIR /root
 
-RUN cp /usr/share/zoneinfo/Asia/Tokyo /etc/localtime \
-  && echo "Asia/Tokyo" > /etc/timezone
-
-RUN apt-get update \
-  && apt-get install -y --no-install-recommends wget unzip \
-  && apt-get clean \
-  && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+RUN apk add --no-cache tzdata wget unzip \
+  && cp /usr/share/zoneinfo/Asia/Tokyo /etc/localtime \
+  && echo "Asia/Tokyo" > /etc/timezone \
+  && apk del tzdata
 
 COPY entrypoint.sh .
 ENTRYPOINT ["sh", "entrypoint.sh"]
