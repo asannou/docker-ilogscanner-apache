@@ -21,7 +21,7 @@ shift $(($OPTIND - 1))
 ACCESSLOG="$1"
 
 if [ ! -e /jar/iLogScanner ]; then
-  wget -q https://www.ipa.go.jp/security/vuln/iLogScanner/app/iLogScanner.zip
+  wget -q https://www.ipa.go.jp/security/vuln/ilogscanner/hjuojm000000gwta-att/iLogScanner.zip
   unzip -q -d /jar iLogScanner.zip
   rm iLogScanner.zip
 fi
