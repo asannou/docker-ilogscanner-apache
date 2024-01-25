@@ -1,4 +1,4 @@
-FROM eclipse-temurin:8-jre-alpine@sha256:9a8c4f5df370686e6f9f0da29e4f6fc0c42337a42bf0b0f55532b0cdc226df71
+FROM eclipse-temurin:8-jre-alpine@sha256:f976b40bd9aef2c578c6063609829804313709bf3adf7a200dad4e160e28ebfc
 
 WORKDIR /root
 
